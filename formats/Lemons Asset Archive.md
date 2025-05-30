@@ -10,7 +10,9 @@ LEMNARC is a file format for storing multiple asset files into one archive
 compression is handled by zlib, using the "best speed" option
 
 ### encryption
-encryption is provided by rsa. the encryption key for the archive is unique for every build of the archive, unless a static key pair is specified.
+archive encryption is provided by 2048-bit rsa, and file encryption is provided by 256-bit aes.
+
+the encryption key for the archives and files is unique for every build of the archive, unless a static key pair is specified.
 
 ## file structure
 
@@ -94,10 +96,11 @@ this is a 32-bit hash of the file that this entry belongs to (TODO: find a hash 
 #### file attributes
 it's 16 bits of file flags
 ```
-	ZO000000 00000000
+	ZOE00000 00000000
 
 	Z - zlib compressed
 	O - file path omitted
+	E - encrypted file
 ```
 
 #### file offset
